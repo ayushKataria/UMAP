@@ -1,13 +1,11 @@
 from sentence_transformers import SentenceTransformer
 
-model = None
 
-def embed_docs(sentences):
+def embed_docs(sentences, embedding_model):
     global model
-    if model is None:
-        model = SentenceTransformer('all-MiniLM-L6-v2')
+    model = SentenceTransformer(embedding_model)
 
-    sentence_embeddings = model.encode(sentences)
+    sentence_embeddings = model.encode(sentences, show_progress_bar=True)
 
     return sentence_embeddings
 
